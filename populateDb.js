@@ -14,7 +14,7 @@ const askCheckingQ = async.queue((id, callback) => {
         askController.createAsk(ask);
       }
 
-      console.log(`Checked Ask ${id} (${askCheckingQ.length()} left)`);
+      console.log(`Checked Ask ${id} (<${askCheckingQ.length() + config.asyncWorkers.askCheckingQ} left)`);
       callback();
     })
     .catch((err) => {

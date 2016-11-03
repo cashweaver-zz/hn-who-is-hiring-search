@@ -12,7 +12,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "populateDb": "NODE_ENV=dev node populateDb.js"
+    "populateDb": "NODE_ENV=dev node populateDb.js",
+    "query": "NODE_ENV=dev node query.js"
   },
   "keywords": [],
   "author": "cashweaver",

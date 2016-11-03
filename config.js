@@ -7,9 +7,9 @@ module.exports = {
   },
   query: {
     // Regex to test against Comment text
-    regex: '',
+    regex: 'remote',
     // Oldest Comment to include in the search (Unix time)
-    oldestComment: '',
+    oldestComment: 1470205707,
   },
   asyncWorkers: {
     askCheckingQ: 1,

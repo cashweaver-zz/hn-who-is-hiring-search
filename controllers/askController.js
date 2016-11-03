@@ -22,7 +22,7 @@ const commentCreationQ = async.queue((commentId, callback) => {
   .then(parseJSON)
   .then(comment => commentController.createComment(comment))
   .then(() => {
-    console.log(`Created Comment ${commentId} (${commentCreationQ.length()} left)`);
+    console.log(`Created Comment ${commentId} (<${commentCreationQ.length() + config.asyncWorkers.commentCreationQ} left)`);
     callback();
   })
   .catch((err) => {
@@ -48,7 +48,7 @@ const askCreationQ = async.queue((ask, callback) => {
     return Ask.create(ask);
   })
   .then(() => {
-    console.log(`Created Comment ${ask.id} (${askCreationQ.length()} left)`);
+    console.log(`Created Comment ${ask.id} (<${askCreationQ.length() + config.asyncWorkers.askCreationQ} left)`);
     commentCreationQ.push(ask.kids, () => {});
     callback();
   })
