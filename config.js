@@ -1,6 +1,6 @@
 module.exports = {
   asyncWorkers: {
-    askCheckingQ: 2,
+    askCheckingQ: 4,
     commentCreationQ: 10,
     askCreationQ: 2,
   },

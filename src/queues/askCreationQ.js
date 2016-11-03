@@ -1,6 +1,7 @@
 const async = require('async');
 const Ask = require('./../db').models.Ask;
 const askController = require('./../controllers/askController');
+const colors = require('./../colors');
 const commentCreationQ = require('./commentCreationQ');
 const config = require('./../../config');
 
@@ -14,7 +15,7 @@ const askCreationQ = async.queue((ask, callback) => {
     })
     .then(() => {
       const aproxQLength = askCreationQ.length() + config.asyncWorkers.askCreationQ;
-      console.log(`Created Ask ${ask.id} (<${aproxQLength} left)`);
+      console.log(colors.verbose(`Ask | Saved ${ask.id} (<${aproxQLength} left)`));
       commentCreationQ.push(ask.kids, () => {});
       callback();
     })
@@ -22,9 +23,5 @@ const askCreationQ = async.queue((ask, callback) => {
       callback(err);
     });
 }, config.asyncWorkers.askCreationQ);
-
-askCreationQ.drain = () => {
-  console.log('Created all Asks');
-};
 
 module.exports = askCreationQ;
