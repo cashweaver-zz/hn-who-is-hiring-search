@@ -29,7 +29,8 @@ const createComment = comment => (
 const getCommentCount = () => Comment.count();
 
 const regexQuery = ({
-  regex,
+  regexes,
+  regexesAndOr,
   oldestComment,
   includeWhoIsHiring,
   includeFreelancerSeekingFreelancer,
@@ -43,10 +44,11 @@ const regexQuery = ({
         ON comments.ask_id = asks.id
       WHERE
         (
-          comments.text ~ \'${regex}\'
-          AND comments.time > ${oldestComment}
-        )
+          comments.time > ${oldestComment}
+          AND (
     `;
+    sql += regexes.map(regex => `comments.text ~ \'${regex}\'`).join(` ${regexesAndOr} `);
+    sql += '))';
 
     if (!includeWhoIsHiring || !includeFreelancerSeekingFreelancer || !includeWhoWantsToBeHired) {
       sql += 'AND (';
@@ -65,7 +67,6 @@ const regexQuery = ({
       sql += ')';
     }
 
-    console.log(sql);
     sequelize
       .query(sql)
       .spread((results, metadata) => {
