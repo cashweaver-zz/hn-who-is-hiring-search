@@ -49,5 +49,7 @@ bower_components
 # Yarn
 yarn.lock
 
-# Databases
-*.sqlite*
+# Results
+queryResults.txt
+
+

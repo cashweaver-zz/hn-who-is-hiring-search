@@ -20,7 +20,7 @@ module.exports = {
     includeWhoWantsToBeHired: false,
 
     // Oldest Comment to include in the search (Unix time)
-    oldestComment: 1470205707,
+    oldestComment: 1420070400,
 
     // Regex to test against Comment text
     regexes: [
@@ -30,5 +30,8 @@ module.exports = {
 
     // Operator to use with your regexes (AND || OR)
     regexesAndOr: 'OR',
+
+    // Path to results file (will be created if it doesn't exist)
+    resultsName: 'queryResults.txt',
   },
 };
