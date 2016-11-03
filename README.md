@@ -1,6 +1,6 @@
 # Hacker News Who is Hiring Search
 
-> Search HN Who is Hiring posts with regexes.
+> Search hiring threads posted by [whoishiring](https://news.ycombinator.com/user?id=whoishiring) with a regular expression.
 
 
 ## Table of Contents
