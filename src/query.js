@@ -1,12 +1,15 @@
-// const moment = require('moment');
 const Promise = require('bluebird');
+const math = require('mathjs');
 const commentController = require('./controllers/commentController');
-const config = require('./config');
+const config = require('./../config');
+
+let commentCount;
 
 const logQueryConfiguration = () => (
   new Promise((resolve) => {
     commentController.getCommentCount()
       .then((count) => {
+        commentCount = count;
         console.log(`Querying ${count} Comments`);
         console.log('');
         console.log('config: ', config.query);
@@ -20,7 +23,8 @@ const logQueryConfiguration = () => (
 logQueryConfiguration()
   .then(() => commentController.regexQuery(config.query))
   .then(({ results, metadata }) => {
-    console.log(`Found ${metadata.rowCount} Comments`);
+    const percentOfAllComments = math.round(metadata.rowCount / commentCount, 3);
+    console.log(`Found ${metadata.rowCount} Comments (${percentOfAllComments}% of all Comments)`);
 
     const commentIds = results.map(result => result.id);
     const commentUrls = commentIds.map(id => `https://news.ycombinator.com/item?id=${id}`);
