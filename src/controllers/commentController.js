@@ -1,6 +1,6 @@
-const Comment = require('../db/').models.Comment;
 const Promise = require('bluebird');
-const sequelize = require('../db/').sequelize;
+const Comment = require('./../db').models.Comment;
+const sequelize = require('./../db').sequelize;
 
 const createComment = comment => (
   new Promise((resolve, reject) => {
@@ -13,7 +13,9 @@ const createComment = comment => (
       if (foundCommentRecord) {
         return resolve(foundCommentRecord);
       }
-      return Comment.create(comment);
+      const relatedComment = comment;
+      relatedComment.ask_id = relatedComment.parent;
+      return Comment.create(relatedComment);
     })
     .then((createdCommentRecord) => {
       resolve(createdCommentRecord);
@@ -26,15 +28,46 @@ const createComment = comment => (
 
 const getCommentCount = () => Comment.count();
 
-const regexQuery = ({ regex, oldestComment }) => (
+const regexQuery = ({
+  regex,
+  oldestComment,
+  includeWhoIsHiring,
+  includeFreelancerSeekingFreelancer,
+  includeWhoWantsToBeHired,
+}) => (
   new Promise((resolve) => {
+    let sql = `
+      SELECT asks.title
+      FROM comments
+      JOIN asks
+        ON comments.ask_id = asks.id
+      WHERE
+        (
+          comments.text ~ \'${regex}\'
+          AND comments.time > ${oldestComment}
+        )
+    `;
+
+    if (!includeWhoIsHiring || !includeFreelancerSeekingFreelancer || !includeWhoWantsToBeHired) {
+      sql += 'AND (';
+      const titleRestrictions = [];
+      if (!includeWhoIsHiring) {
+        titleRestrictions.push('asks.title NOT ILIKE \'%hiring%\'');
+      }
+      if (!includeFreelancerSeekingFreelancer) {
+        titleRestrictions.push('asks.title NOT ILIKE \'%freelancer%\'');
+      }
+      if (!includeWhoWantsToBeHired) {
+        titleRestrictions.push('asks.title NOT ILIKE \'%hired%\'');
+      }
+
+      sql += titleRestrictions.join(' AND ');
+      sql += ')';
+    }
+
+    console.log(sql);
     sequelize
-      .query(`
-        SELECT id
-        FROM comments
-        WHERE text ~ \'${regex}\'
-          AND time > ${oldestComment}
-      `)
+      .query(sql)
       .spread((results, metadata) => {
         resolve({ results, metadata });
       });

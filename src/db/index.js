@@ -1,4 +1,4 @@
-const config = require('../config');
+const config = require('../../config');
 const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize(
@@ -44,6 +44,8 @@ const Ask = sequelize.define('ask', {
   url: {
     type: Sequelize.STRING,
   },
+}, {
+  underscored: true,
 });
 
 const Comment = sequelize.define('comment', {
@@ -67,6 +69,8 @@ const Comment = sequelize.define('comment', {
   type: {
     type: Sequelize.STRING,
   },
+}, {
+  underscored: true,
 });
 
 Ask.hasMany(Comment);

@@ -1,6 +1,6 @@
 const askController = require('./controllers/askController');
 const async = require('async');
-const config = require('./config');
+const config = require('./../config');
 // const Promise = require('bluebird');
 const rp = require('request-promise');
 const sequelize = require('./db').sequelize;

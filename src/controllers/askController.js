@@ -1,8 +1,8 @@
-const Ask = require('../db/').models.Ask;
+const Ask = require('./../db').models.Ask;
 const async = require('async');
-const Comment = require('../db/').models.Comment;
+const Comment = require('./../db').models.Comment;
 const commentController = require('./commentController');
-const config = require('../config');
+const config = require('./../../config');
 const rp = require('request-promise');
 
 const parseJSON = res => JSON.parse(res);

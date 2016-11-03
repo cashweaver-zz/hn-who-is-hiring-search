@@ -1,7 +1,7 @@
 // const moment = require('moment');
 const Promise = require('bluebird');
 const commentController = require('./controllers/commentController');
-const config = require('./config');
+const config = require('./../config');
 
 const logQueryConfiguration = () => (
   new Promise((resolve) => {
@@ -22,7 +22,8 @@ logQueryConfiguration()
   .then(({ results, metadata }) => {
     console.log(`Found ${metadata.rowCount} Comments`);
 
-    const commentIds = results.map(result => result.id);
+    //const commentIds = results.map(result => result.id);
+    const commentIds = results.map(result => result.title);
     const commentUrls = commentIds.map(id => `https://news.ycombinator.com/item?id=${id}`);
 
     commentUrls.forEach((url) => {
