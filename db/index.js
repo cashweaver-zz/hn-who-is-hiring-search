@@ -9,9 +9,10 @@ const sequelize = new Sequelize(
     host: 'localhost',
     dialect: 'sqlite',
     // eslint-disable-next-line
-    logging: (process.env.NODE_ENV === 'test') ? false : console.log,
+    logging: false,
+    //logging: (process.env.NODE_ENV !== 'dev') ? false : console.log,
     storage: config.db.path,
-  },
+  }
 );
 
 const Ask = sequelize.define('ask', {
@@ -23,6 +24,7 @@ const Ask = sequelize.define('ask', {
   },
   id: {
     type: Sequelize.INTEGER,
+    primaryKey: true,
   },
   score: {
     type: Sequelize.INTEGER,
@@ -50,6 +52,7 @@ const Comment = sequelize.define('comment', {
   },
   id: {
     type: Sequelize.INTEGER,
+    primaryKey: true,
   },
   // Ignore children of comments as we're only interested in top-level comments.
   parent: {

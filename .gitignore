@@ -48,3 +48,6 @@ bower_components
 
 # Yarn
 yarn.lock
+
+# Databases
+*.sqlite*
