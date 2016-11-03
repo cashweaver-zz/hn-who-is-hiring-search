@@ -12,6 +12,7 @@
 
 ## Usage
 
+1. Clone this repository.
 1. Install dependencies and ensure postgresql is running.
 1. Populate the database `npm run populateDb`.
 1. Customize the query in `config.js`.
