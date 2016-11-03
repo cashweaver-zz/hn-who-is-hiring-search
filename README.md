@@ -12,6 +12,7 @@
 
 ## Usage
 
+1. Install dependencies and ensure postgresql is running.
 1. Populate the database `npm run populateDb`.
 1. Customize the query in `config.js`.
 1. Run the query `npm run query`.
@@ -19,7 +20,7 @@
 ## Requirements
 
 - Node 6.9.1
-- sqlite3 3.11.0
+- PostgreSQL 9.6.1
 
 ## Development
 

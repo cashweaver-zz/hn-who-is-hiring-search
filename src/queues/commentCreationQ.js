@@ -1,5 +1,6 @@
 const async = require('async');
 const rp = require('request-promise');
+const colors = require('./../colors');
 const Comment = require('./../db').models.Comment;
 const commentController = require('./../controllers/commentController');
 const config = require('./../../config');
@@ -27,7 +28,7 @@ const commentCreationQ = async.queue((commentId, callback) => {
   })
   .then(() => {
     const aproxQLength = commentCreationQ.length() + config.asyncWorkers.commentCreationQ;
-    console.log(`Created Comment ${commentId} (<${aproxQLength} left)`);
+    console.log(colors.verbose(`Comment | Saved ${commentId} (<${aproxQLength} left)`));
     callback();
   })
   .catch((err) => {
@@ -36,7 +37,7 @@ const commentCreationQ = async.queue((commentId, callback) => {
 }, config.asyncWorkers.commentCreationQ);
 
 commentCreationQ.drain = () => {
-  console.log('Created all Comments');
+  console.log(colors.success('Saved all Comments'));
 };
 
 module.exports = commentCreationQ;
