@@ -7,11 +7,11 @@ const sequelize = new Sequelize(
   config.db.password,
   {
     host: 'localhost',
-    dialect: 'sqlite',
+    dialect: 'postgres',
     // eslint-disable-next-line
     logging: false,
     //logging: (process.env.NODE_ENV !== 'dev') ? false : console.log,
-    storage: config.db.path,
+    //storage: config.db.path,
   }
 );
 
@@ -30,7 +30,7 @@ const Ask = sequelize.define('ask', {
     type: Sequelize.INTEGER,
   },
   text: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
   },
   time: {
     type: Sequelize.INTEGER,
@@ -59,7 +59,7 @@ const Comment = sequelize.define('comment', {
     type: Sequelize.INTEGER,
   },
   text: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
   },
   time: {
     type: Sequelize.INTEGER,
@@ -71,9 +71,6 @@ const Comment = sequelize.define('comment', {
 
 Ask.hasMany(Comment);
 Comment.belongsTo(Ask);
-
-Ask.sync();
-Comment.sync();
 
 module.exports = {
   models: {

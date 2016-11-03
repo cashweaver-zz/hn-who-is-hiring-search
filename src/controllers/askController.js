@@ -20,12 +20,20 @@ const commentCreationQ = async.queue((commentId, callback) => {
     return rp(`https://hacker-news.firebaseio.com/v0/item/${commentId}.json`);
   })
   .then(parseJSON)
-  .then(comment => commentController.createComment(comment))
+  .then((comment) => {
+    if ({}.hasOwnProperty.call(comment, 'deleted')) {
+      throw new Error('Comment has been deleted.');
+    }
+
+    return commentController.createComment(comment);
+  })
   .then(() => {
-    console.log(`Created Comment ${commentId} (<${commentCreationQ.length() + config.asyncWorkers.commentCreationQ} left)`);
+    const aproxQLength = commentCreationQ.length() + config.asyncWorkers.commentCreationQ;
+    console.log(`Created Comment ${commentId} (<${aproxQLength} left)`);
     callback();
   })
   .catch((err) => {
+    console.error(err);
     callback(err);
   });
 }, config.asyncWorkers.commentCreationQ);
@@ -48,11 +56,13 @@ const askCreationQ = async.queue((ask, callback) => {
     return Ask.create(ask);
   })
   .then(() => {
-    console.log(`Created Comment ${ask.id} (<${askCreationQ.length() + config.asyncWorkers.askCreationQ} left)`);
+    const aproxQLength = askCreationQ.length() + config.asyncWorkers.askCreationQ;
+    console.log(`Created Ask ${ask.id} (<${aproxQLength} left)`);
     commentCreationQ.push(ask.kids, () => {});
     callback();
   })
   .catch((err) => {
+    console.error(err);
     callback(err);
   });
 }, config.asyncWorkers.askCreationQ);

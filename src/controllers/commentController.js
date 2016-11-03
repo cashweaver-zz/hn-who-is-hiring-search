@@ -26,20 +26,20 @@ const createComment = comment => (
 
 const getCommentCount = () => Comment.count();
 
-const regexQuery = ({ regex, oldestTime }) => {
-  console.log(`
-    SELECT id
-    FROM \`comments\`
-    WHERE text REGEXP \'${regex}\'
-      AND time > ${oldestTime}
-  `);
-  return sequelize.query(`
-    SELECT id
-    FROM \`comments\`
-    WHERE text REGEXP ${regex}
-      AND time > ${oldestTime}
-  `);
-};
+const regexQuery = ({ regex, oldestComment }) => (
+  new Promise((resolve) => {
+    sequelize
+      .query(`
+        SELECT id
+        FROM comments
+        WHERE text ~ \'${regex}\'
+          AND time > ${oldestComment}
+      `)
+      .spread((results, metadata) => {
+        resolve({ results, metadata });
+      });
+  })
+);
 
 module.exports = {
   createComment,
