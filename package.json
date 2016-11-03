@@ -1,7 +1,7 @@
 {
   "name": "hn-who-is-hiring-search",
   "description": "Search hiring threads posted by [whoishiring](https://news.ycombinator.com/user?id=whoishiring) with a regular expression.",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "devDependencies": {
     "eslint": "^3.9.1",
     "eslint-config-airbnb": "^12.0.0",
@@ -10,8 +10,8 @@
     "eslint-plugin-react": "^6.5.0"
   },
   "scripts": {
-    "populateDb": "NODE_ENV=prod node ./src/populateDb.js",
-    "query": "NODE_ENV=prod node ./src/query.js"
+    "populateDb": "NODE_ENV=production node ./src/populateDb.js",
+    "query": "NODE_ENV=production node ./src/query.js"
   },
   "keywords": [],
   "author": "cashweaver",
