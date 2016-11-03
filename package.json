@@ -1,0 +1,33 @@
+{
+  "name": "hn-who-is-hiring-search",
+  "description": "Search HN Who is Hiring posts with regexes.",
+  "main": "app.js",
+  "version": "1.0.0",
+  "devDependencies": {
+    "eslint": "^3.9.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.5.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "cashweaver",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.76.0",
+    "request-promise": "^4.1.1",
+    "sequelize": "^3.24.6"
+  },
+  "eslintConfig": {
+    "extends": "airbnb",
+    "env": {
+      "mocha": true
+    },
+    "plugins": [
+      "import"
+    ]
+  }
+}
