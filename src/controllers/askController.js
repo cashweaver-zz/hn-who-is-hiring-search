@@ -42,7 +42,6 @@ commentCreationQ.drain = () => {
   console.log('Created all Comments');
 };
 
-
 const askCreationQ = async.queue((ask, callback) => {
   Ask.find({
     where: {

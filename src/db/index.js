@@ -8,10 +8,7 @@ const sequelize = new Sequelize(
   {
     host: 'localhost',
     dialect: 'postgres',
-    // eslint-disable-next-line
     logging: false,
-    //logging: (process.env.NODE_ENV !== 'dev') ? false : console.log,
-    //storage: config.db.path,
   }
 );
 
