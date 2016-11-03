@@ -37,7 +37,7 @@ const regexQuery = ({
 }) => (
   new Promise((resolve) => {
     let sql = `
-      SELECT asks.title
+      SELECT comments.id
       FROM comments
       JOIN asks
         ON comments.ask_id = asks.id

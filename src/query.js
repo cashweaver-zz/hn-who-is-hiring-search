@@ -22,8 +22,7 @@ logQueryConfiguration()
   .then(({ results, metadata }) => {
     console.log(`Found ${metadata.rowCount} Comments`);
 
-    //const commentIds = results.map(result => result.id);
-    const commentIds = results.map(result => result.title);
+    const commentIds = results.map(result => result.id);
     const commentUrls = commentIds.map(id => `https://news.ycombinator.com/item?id=${id}`);
 
     commentUrls.forEach((url) => {

@@ -7,7 +7,7 @@ module.exports = {
   },
   query: {
     // Regex to test against Comment text
-    regex: 'remote',
+    regex: '(js|javascript|react).*remote',
     // Oldest Comment to include in the search (Unix time)
     oldestComment: 1470205707,
     includeWhoIsHiring: true,
