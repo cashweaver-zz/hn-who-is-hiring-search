@@ -10,9 +10,8 @@
     "eslint-plugin-react": "^6.5.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "populateDb": "NODE_ENV=dev node ./src/populateDb.js",
-    "query": "NODE_ENV=dev node ./src/query.js"
+    "populateDb": "NODE_ENV=prod node ./src/populateDb.js",
+    "query": "NODE_ENV=prod node ./src/query.js"
   },
   "keywords": [],
   "author": "cashweaver",
