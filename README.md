@@ -1,11 +1,11 @@
 # Hacker News Who is Hiring Search
 
-> Search HN Who is Hiring posts with regexes.
+> Search hiring threads posted by [whoishiring](https://news.ycombinator.com/user?id=whoishiring) with a regular expression.
 
 
 ## Table of Contents
 
-1. [Usage](#Usage)
+1. [Usage](#usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
