@@ -30,8 +30,8 @@ rp('https://hacker-news.firebaseio.com/v0/user/whoishiring.json')
   .then(parseJSON)
   .then(({ submitted }) => {
     // Only work with a few submissions while we're developing.
-    // const askIds = submitted.slice(0, 20);
-    const askIds = submitted;
+    const askIds = submitted.slice(0, 20);
+    // const askIds = submitted;
 
     console.log(`Processing ${askIds.length} Asks`);
     askIds.forEach(id => askCheckingQ.push(id, () => {}));
