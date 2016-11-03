@@ -7,10 +7,10 @@ const logQueryConfiguration = () => (
   new Promise((resolve) => {
     commentController.getCommentCount()
       .then((count) => {
-        console.log(`Querying ${count} Comments:`);
-        Object.getOwnPropertyNames(config.query).forEach((key) => {
-          console.log(`  ${key}: ${config.query[key]}`);
-        });
+        console.log(`Querying ${count} Comments`);
+        console.log('');
+        console.log('config: ', config.query);
+        console.log('');
         console.log('');
         resolve();
       });
