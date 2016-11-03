@@ -2,7 +2,7 @@ const async = require('async');
 const rp = require('request-promise');
 const Comment = require('./../db').models.Comment;
 const commentController = require('./../controllers/commentController');
-const config = require('./../config');
+const config = require('./../../config');
 const parseJSON = require('../requestHelpers').parseJSON;
 
 const commentCreationQ = async.queue((commentId, callback) => {

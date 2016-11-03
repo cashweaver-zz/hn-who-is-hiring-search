@@ -13,7 +13,7 @@
 ## Usage
 
 1. Populate the database `npm run populateDb`.
-1. Customize the query in `config.js`.
+1. Customize the query in `queryConfig.js`.
 1. Run the query `npm run query`.
 
 ## Requirements

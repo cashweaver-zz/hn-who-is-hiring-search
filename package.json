@@ -20,6 +20,7 @@
   "dependencies": {
     "async": "^2.1.2",
     "bluebird": "^3.4.6",
+    "mathjs": "^3.6.0",
     "moment": "^2.15.2",
     "pg": "^6.1.0",
     "pg-hstore": "^2.3.2",

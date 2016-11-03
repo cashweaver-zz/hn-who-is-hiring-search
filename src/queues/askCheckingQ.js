@@ -1,7 +1,7 @@
 const async = require('async');
 const rp = require('request-promise');
 const askCreationQ = require('./askCreationQ');
-const config = require('./../config');
+const config = require('./../../config');
 const parseJSON = require('./../requestHelpers').parseJSON;
 
 const askCheckingQ = async.queue((id, callback) => {
