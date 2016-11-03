@@ -2,7 +2,7 @@ const Promise = require('bluebird');
 const Comment = require('./../db').models.Comment;
 const sequelize = require('./../db').sequelize;
 
-const createComment = comment => (
+const create = comment => (
   new Promise((resolve, reject) => {
     Comment.find({
       where: {
@@ -75,8 +75,17 @@ const regexQuery = ({
   })
 );
 
+const findById = id => (
+  Comment.find({
+    where: {
+      id,
+    },
+  })
+);
+
 module.exports = {
-  createComment,
+  create,
+  findById,
   getCommentCount,
   regexQuery,
 };
