@@ -2,7 +2,7 @@ const async = require('async');
 const Ask = require('./../db').models.Ask;
 const askController = require('./../controllers/askController');
 const commentCreationQ = require('./commentCreationQ');
-const config = require('./../../config');
+const config = require('./../config');
 
 const askCreationQ = async.queue((ask, callback) => {
   askController.findById(ask.id)

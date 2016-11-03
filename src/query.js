@@ -1,7 +1,7 @@
 // const moment = require('moment');
 const Promise = require('bluebird');
 const commentController = require('./controllers/commentController');
-const config = require('./../config');
+const config = require('./config');
 
 const logQueryConfiguration = () => (
   new Promise((resolve) => {
