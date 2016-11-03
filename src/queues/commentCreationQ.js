@@ -14,22 +14,28 @@ const commentCreationQ = async.queue((commentId, callback) => {
   })
   .then((foundCommentRecord) => {
     if (foundCommentRecord) {
+      const aproxQLength = commentCreationQ.length() + config.asyncWorkers.commentCreationQ;
+      console.log(colors.verbose(`Comment | Already Exists ${commentId} (<${aproxQLength} left)`));
       return callback();
     }
-    return rp(`https://hacker-news.firebaseio.com/v0/item/${commentId}.json`);
-  })
-  .then(parseJSON)
-  .then((comment) => {
-    if ({}.hasOwnProperty.call(comment, 'deleted')) {
-      throw new Error('Comment has been deleted.');
-    }
 
-    return commentController.create(comment);
-  })
-  .then(() => {
-    const aproxQLength = commentCreationQ.length() + config.asyncWorkers.commentCreationQ;
-    console.log(colors.verbose(`Comment | Saved ${commentId} (<${aproxQLength} left)`));
-    callback();
+    return rp(`https://hacker-news.firebaseio.com/v0/item/${commentId}.json`)
+      .then(parseJSON)
+      .then((comment) => {
+        if ({}.hasOwnProperty.call(comment, 'deleted')) {
+          throw new Error('Comment has been deleted.');
+        }
+
+        return commentController.create(comment);
+      })
+      .then(() => {
+        const aproxQLength = commentCreationQ.length() + config.asyncWorkers.commentCreationQ;
+        console.log(colors.verbose(`Comment | Saved ${commentId} (<${aproxQLength} left)`));
+        callback();
+      })
+      .catch((err) => {
+        callback(err);
+      });
   })
   .catch((err) => {
     callback(err);
