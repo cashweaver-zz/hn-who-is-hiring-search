@@ -31,6 +31,7 @@ const getCommentCount = () => Comment.count();
 const regexQuery = ({
   regexes,
   regexesAndOr,
+  regexCaseInsensitive,
   oldestComment,
   includeWhoIsHiring,
   includeFreelancerSeekingFreelancer,
@@ -47,7 +48,7 @@ const regexQuery = ({
           comments.time > ${oldestComment}
           AND (
     `;
-    sql += regexes.map(regex => `comments.text ~ \'${regex}\'`).join(` ${regexesAndOr} `);
+    sql += regexes.map(regex => `comments.text ~${regexCaseInsensitive ? '*' : ' '} \'${regex}\'`).join(` ${regexesAndOr} `);
     sql += '))';
 
     if (!includeWhoIsHiring || !includeFreelancerSeekingFreelancer || !includeWhoWantsToBeHired) {

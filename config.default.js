@@ -5,9 +5,9 @@ module.exports = {
     askCreationQ: 2,
   },
   db: {
-    name: 'hnwhoishiring',
-    username: 'hnwih',
-    password: 'asdf',
+    name: '',
+    username: '',
+    password: '',
   },
   query: {
     // Include 'Who is hiring?' Asks
@@ -24,12 +24,15 @@ module.exports = {
 
     // Regex to test against Comment text
     regexes: [
-      'remote.*(js|javascript|react)',
-      '(js|javascript|react).*remote',
+      '.*(san francisco).*',
+      '.*(javascript).*',
     ],
 
     // Operator to use with your regexes (AND || OR)
-    regexesAndOr: 'OR',
+    regexesAndOr: 'AND',
+
+    // Should regexes be evaluated as case sensitive or insensitive?
+    regexCaseInsensitive: true,
 
     // Path to results file (will be created if it doesn't exist)
     resultsName: 'queryResults.txt',
